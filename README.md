@@ -308,7 +308,7 @@ However, for the less ambitious, the way we can do filtering or other manipulati
         <input name=expr value=x^2>
         <script type=module blocking=render>
             (await import('for-fetch'))
-            .filter(['newton-svc/', ':op/:expr'], async resp => {
+            .filter('[for~="@op"][for~="@expr"][base="newton-svc"]', async resp => {
                 ...
             })
 
