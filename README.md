@@ -144,7 +144,7 @@ The click event is assumed if not specified.
 
 <for-fetch
     form="@newtonService"
-    href=https://newton.now.sh/api/v2/:op/:expr
+    :href=https://newton.now.sh/api/v2/:op/:expr
     target=-object
 >
 </for-fetch>
@@ -289,7 +289,7 @@ Then the service worker could add a special header in the response indicating wh
 
 This web component already does support headers, but perhaps some better visibility could be added for this functionality.
 
-## Filtering with the onload event / import maps
+## Filtering with the onload event / import maps / preconnect
 
 However, for the less ambitious, the way we can do filtering or other manipulation of the results in the main thread is via the onload event:
 
@@ -315,7 +315,8 @@ However, for the less ambitious, the way we can do filtering or other manipulati
         </script>
         <for-fetch
             for="@op @expr"
-            href='["newton-svc", ":op/:expr"]'
+            base=newton-svc
+            :href=:op/:expr
             target=-object
         >
         </for-fetch>
@@ -324,6 +325,8 @@ However, for the less ambitious, the way we can do filtering or other manipulati
         
     </body>
 ```
+
+Alternatively, can work with link href rel=preconnect tags to resolve the base. [TODO]
 
 ## Connecting to indexed db in the filter code [TODO]
 
