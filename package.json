@@ -1,11 +1,39 @@
 {
   "name": "for-fetch",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Base class for web components as a service",
+  "main": "for-fetch.js",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements"
+  ],
+  "dependencies": {
+    "idb-keyval": "6.2.1",
+    "stream-orator": "0.0.24",
+    "trans-render": "0.0.848"
   },
-  "author": "",
-  "license": "MIT"
+  "devDependencies": {
+    "@power-elements/json-viewer": "2.1.1",
+    "may-it-serve": "0.0.8",
+    "may-it-be": "0.0.180"
+  },
+  "exports": {
+    "./for-fetch.js": "./for-fetch.js",
+    ".": "./index.js"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "serve": "python3 ./node_modules/ssi-server/ssi_server.py",
+    "safari": "npx playwright wk http://localhost:8000",
+    "update": "ncu -u && npm install",
+    "doc": "node doc.js"
+  },
+ "author": "Bruce B. Anderson <anderson.bruce.b@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahrus/for-fetch/issues"
+  },
+  "homepage": "https://github.com/bahrus/for-fetch#readme"
 }
