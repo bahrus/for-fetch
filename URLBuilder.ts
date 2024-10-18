@@ -1,10 +1,8 @@
 export class URLBuilder{
-    //#reea: RegExpMatchArray | null = null;
     constructor(public pattern: string){}
 
     build(obj: any){
         let returnStr = this.pattern;
-        //const reg = /:\w+/g;
         const tokens = [];
         let i = 0;
         let result;
@@ -15,11 +13,8 @@ export class URLBuilder{
             if(key in obj){
                 tokens.push(obj[key]);
             }
-            
-            console.log({result});
         }
         const r = tokens.join('');
-        console.log({r, tokens});
         return r;
     }
 }
