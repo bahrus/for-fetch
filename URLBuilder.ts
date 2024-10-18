@@ -19,7 +19,7 @@ export class URLBuilder{
     }
 
     build(obj: any){
-        const tokens = [];
+        const tokens: Array<string> = [];
         for(const tokenItem of this.#tokenStream){
             const [beforeToken, key] = tokenItem;
             tokens.push(beforeToken);
