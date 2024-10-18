@@ -9,10 +9,17 @@
     <script type=module>
         import {URLBuilder} from '/URLBuilder.js';
         const uc1 = new URLBuilder('https://example.com/:id/:name');
-        const str1 = uc1.build({id: 'hello', name: 'good'});
+        const hg = {id: 'hello', name: 'good'}
+        const str1 = uc1.build(hg);
         console.log({str1});
-        const str2 = uc1.build({id: 'for', name: 'fetch'});
+        const ff = {id: 'for', name: 'fetch'};
+        const str2 = uc1.build(ff);
         console.log({str2});
+
+        const uc2 = new URLBuilder(':id/:name/lastPart');
+        const str3 = uc2.build(hg);
+        const str4 = uc2.build(ff);
+        console.log({str3, str4});
     </script>
 </body>
 </html>

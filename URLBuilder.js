@@ -16,7 +16,6 @@ export class URLBuilder {
         if (i < pattern.length) {
             positions.push([pattern.substring(i), undefined]);
         }
-        console.log({ positions });
     }
     build(obj) {
         const tokens = [];
