@@ -1,6 +1,6 @@
 import {OConfig} from './ts-refs/trans-render/froop/types';
 import { Actions, AllProps } from './ts-refs/for-fetch/types';
-export const config: OConfig<AllProps & GlobalEventHandlers, Actions> = {
+export const config: OConfig<AllProps, Actions> = {
     propDefaults:{
         accept: '',
         /**
