@@ -1,13 +1,24 @@
 export class URLBuilder{
-    constructor(public pattern: string){}
+    #positions: Array<[number, string]> = [0];
+    constructor(public pattern: string){
+        let result;
+        let i = 0;
+        const positions = this.#positions;
+        while ((result = reg.exec(pattern)) !== null) {
+            const r = result[0]
+            const key = r.substring(1);
+            i = result.index + r.length;
+            positions.push([i, key]);
+        }
+    }
 
     build(obj: any){
-        let returnStr = this.pattern;
+        let pattern = this.pattern;
         const tokens = [];
         let i = 0;
         let result;
-        while ((result = reg.exec(returnStr)) !== null) {
-            tokens.push(returnStr.substring(i, result.index));
+        while ((result = reg.exec(pattern)) !== null) {
+            tokens.push(pattern.substring(i, result.index));
             const key = result[0].substring(1);
             i = result.index + result[0].length;
             if(key in obj){
