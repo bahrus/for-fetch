@@ -9,7 +9,7 @@
 		"skipLibCheck": true,
 	},
 	"files":[
-		"URLCompiler.ts"
+		"URLBuilder.ts"
 	],
 	"exclude":[
 		"node_modules"
