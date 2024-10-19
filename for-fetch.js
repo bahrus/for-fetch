@@ -9,6 +9,28 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
             return accept;
         return as === 'html' ? 'text/html' : 'application/json';
     }
+    #whenController;
+    async initializeWhen(self) {
+        const { when, nextWhenCount } = self;
+        if (!when) {
+            return {
+                whenCount: nextWhenCount
+            };
+        }
+        if (this.#whenController !== undefined)
+            this.#whenController.abort();
+        this.#whenController = new AbortController();
+        const { parse } = await import('trans-render/dss/parse.js');
+        const specifier = await parse(when);
+        const { evt } = specifier;
+        const { find } = await import('trans-render/dss/find.js');
+        const srcEl = await find(self, specifier);
+        if (!srcEl)
+            throw 404;
+        srcEl.addEventListener(evt || 'click', e => {
+            self.whenCount = self.nextWhenCount;
+        }, { signal: this.#whenController.signal });
+    }
     async doStream(self, href, resolvedTarget) {
         const { streamOrator } = await import('stream-orator/StreamOrator.js');
         streamOrator(href, this.request$(self), resolvedTarget);
@@ -61,6 +83,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
         //TODO increment ariaBusy / decrement in case other components are affecting
         if (resolvedTarget)
             resolvedTarget.ariaBusy = 'false';
+        return data;
     }
     async do(self) {
         const { whenCount } = self;
@@ -83,7 +106,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
                 this.doStream(self, href, resolvedTarget);
                 return;
             }
-            data = this.getData(self, href, resolvedTarget);
+            data = await this.getData(self, href, resolvedTarget);
         }
         switch (as) {
             case 'text':
@@ -111,6 +134,20 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
                 }
                 break;
         }
+    }
+    async parseTarget(self) {
+        const { target } = self;
+        if (!target) {
+            return {
+                targetSelf: true,
+            };
+        }
+        const { parse } = await import('trans-render/dss/parse.js');
+        const targetSpecifier = await parse(target);
+        return {
+            targetSelf: false,
+            targetSpecifier
+        };
     }
     request$(self) {
         const { method, body, credentials } = self;

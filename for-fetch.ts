@@ -16,6 +16,26 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
         return as === 'html' ? 'text/html' : 'application/json';
     
     }
+    #whenController: AbortController | undefined;
+    async initializeWhen(self: this){
+        const {when, nextWhenCount} = self;
+        if(!when){
+            return {
+                whenCount: nextWhenCount
+            } as PP
+        }
+        if(this.#whenController !== undefined) this.#whenController.abort();
+        this.#whenController = new AbortController();
+        const {parse} = await import('trans-render/dss/parse.js');
+        const specifier = await parse(when);
+        const {evt} = specifier;
+        const {find} = await import('trans-render/dss/find.js');
+        const srcEl = await find(self, specifier);
+        if(!srcEl) throw 404;
+        srcEl.addEventListener(evt || 'click', e => {
+            self.whenCount = self.nextWhenCount;
+        }, {signal: this.#whenController.signal});
+    }
 
     async doStream(self: this, href: string, resolvedTarget: HTMLElement){
         const {streamOrator} = await import('stream-orator/StreamOrator.js');
@@ -68,6 +88,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
         }
         //TODO increment ariaBusy / decrement in case other components are affecting
         if(resolvedTarget) resolvedTarget.ariaBusy = 'false';
+        return data;
     }
     async do(self: this){
         
@@ -91,7 +112,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
                     this.doStream(self, href!, resolvedTarget);
                     return;
                 }
-                data = this.getData(self, href!, resolvedTarget);
+                data = await this.getData(self, href!, resolvedTarget);
             }
             
             switch(as){
@@ -120,6 +141,21 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
                     break;
             }
         
+    }
+
+    async parseTarget(self: this){
+        const {target} = self;
+        if(!target){
+            return {
+                targetSelf: true,
+            } as PP
+        }
+        const {parse} = await import('trans-render/dss/parse.js');
+        const targetSpecifier = await parse(target);
+        return {
+            targetSelf: false,
+            targetSpecifier    
+        } as PP;
     }
 
     request$(self: this){

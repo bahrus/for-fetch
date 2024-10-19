@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Onion include</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <h3>Go to <a href="https://cors-anywhere.herokuapp.com/corsdemo">cors anywhere</a> to unlock the service for a limited amount of time</h3>
+    <for-fetch
+        href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
+        as=html shadow=open>
+    </for-fetch>
+    <script type=module src=/index.js></script>
+</body>
+</html>
