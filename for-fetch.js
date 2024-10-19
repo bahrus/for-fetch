@@ -9,6 +9,59 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
             return accept;
         return as === 'html' ? 'text/html' : 'application/json';
     }
+    async doStream(self, href, resolvedTarget) {
+        const { streamOrator } = await import('stream-orator/StreamOrator.js');
+        streamOrator(href, this.request$(self), resolvedTarget);
+    }
+    async getData(self, href, resolvedTarget) {
+        const { noCache, stream, as } = self;
+        let data;
+        resolvedTarget.ariaBusy = 'true';
+        if (this.#abortController !== undefined) {
+            this.#abortController.abort();
+        }
+        this.#abortController = new AbortController();
+        this.request$(self).signal = this.#abortController?.signal;
+        let resp;
+        try {
+            resp = await fetch(href, this.request$(self));
+        }
+        catch (e) {
+            const err = e;
+            this.dispatchEvent(new ErrorEvent('error', err));
+            return;
+        }
+        if (!this.validateResp(resp)) {
+            throw [resp.statusText, resp.status];
+        }
+        ;
+        //TODO - validate
+        switch (as) {
+            case 'text':
+            case 'html':
+                data = await resp.text();
+                break;
+            case 'json':
+                try {
+                    data = await resp.json();
+                }
+                catch (e) {
+                    const err = e;
+                    this.dispatchEvent(new ErrorEvent('error', err));
+                    return;
+                }
+                break;
+        }
+        const loadEvent = new LoadEvent(data);
+        this.dispatchEvent(loadEvent);
+        data = loadEvent.data;
+        if (!noCache && !cache.has(this.localName)) {
+            cache.set(this.localName, new Map());
+        }
+        //TODO increment ariaBusy / decrement in case other components are affecting
+        if (resolvedTarget)
+            resolvedTarget.ariaBusy = 'false';
+    }
     async do(self) {
         const { whenCount } = self;
         super.covertAssignment({
@@ -16,67 +69,21 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
         });
         const { noCache, as, stream, href } = self;
         const resolvedTarget = await self.resolveTarget(self);
-        if (resolvedTarget && resolvedTarget.ariaLive === null)
+        if (resolvedTarget === null) {
+            throw 404;
+        }
+        if (resolvedTarget.ariaLive === null)
             resolvedTarget.ariaLive = 'polite';
         let data;
         if (!noCache) {
             data = cache.get(this.localName)?.get(href);
         }
         if (data === undefined) {
-            if (resolvedTarget) {
-                resolvedTarget.ariaBusy = 'true';
-            }
-            if (this.#abortController !== undefined) {
-                this.#abortController.abort();
-            }
-            this.#abortController = new AbortController();
-            this.request$(self).signal = this.#abortController?.signal;
-            if (as === 'html' && stream) {
-                const { streamOrator } = await import('stream-orator/StreamOrator.js');
-                const { target } = self;
-                const targetEl = this.getRootNode().querySelector(target);
-                streamOrator(href, this.request$(self), targetEl);
+            if (as === 'html' && stream && resolvedTarget instanceof HTMLElement) {
+                this.doStream(self, href, resolvedTarget);
                 return;
             }
-            let resp;
-            try {
-                resp = await fetch(href, this.request$(self));
-            }
-            catch (e) {
-                const err = e;
-                this.dispatchEvent(new ErrorEvent('error', err));
-                return;
-            }
-            if (!this.validateResp(resp)) {
-                throw [resp.statusText, resp.status];
-            }
-            ;
-            //TODO - validate
-            switch (as) {
-                case 'text':
-                case 'html':
-                    data = await resp.text();
-                    break;
-                case 'json':
-                    try {
-                        data = await resp.json();
-                    }
-                    catch (e) {
-                        const err = e;
-                        this.dispatchEvent(new ErrorEvent('error', err));
-                        return;
-                    }
-                    break;
-            }
-            const loadEvent = new LoadEvent(data);
-            this.dispatchEvent(loadEvent);
-            data = loadEvent.data;
-            if (!noCache && !cache.has(this.localName)) {
-                cache.set(this.localName, new Map());
-            }
-            //TODO increment ariaBusy / decrement in case other components are affecting
-            if (resolvedTarget)
-                resolvedTarget.ariaBusy = 'false';
+            data = this.getData(self, href, resolvedTarget);
         }
         switch (as) {
             case 'text':
@@ -119,7 +126,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
     async resolveTarget(self) {
         const { targetSelf, targetSpecifier } = this;
         if (targetSelf)
-            return null;
+            return this;
         //if(targetElO?.scope === undefined) throw 'NI';
         const { find } = await import('trans-render/dss/find.js');
         return await find(self, targetSpecifier);
