@@ -38,7 +38,6 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
                 }
                 if(this.#abortController !== undefined){
                     this.#abortController.abort();
-                    this.#abortController = new AbortController();
                 }
                 this.#abortController = new AbortController();
                 this.request$(self).signal = this.#abortController?.signal;
