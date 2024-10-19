@@ -19,7 +19,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
 
     
     async do(self: this){
-        try{
+        
             const {whenCount} = self;
             super.covertAssignment({
                 nextWhenCount: whenCount! + 1
@@ -48,7 +48,14 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
                     streamOrator(href!, this.request$(self), targetEl);
                     return;
                 }
-                const resp = await fetch(href!, this.request$(self));
+                let resp: Response | undefined;
+                try{
+                    resp = await fetch(href!, this.request$(self));
+                }catch(e){
+                    const err = e as Error
+                    this.dispatchEvent(new ErrorEvent('error', err));
+                    return;
+                }
                 if(!this.validateResp(resp)) {
                     throw [resp.statusText, resp.status]
                 };
@@ -59,7 +66,14 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
                         data = await resp.text();
                         break;
                     case 'json':
-                        data = await resp.json();
+                        try{
+                            data = await resp.json();
+                        }catch(e){
+                            const err = e as Error
+                            this.dispatchEvent(new ErrorEvent('error', err));
+                            return;
+                        }
+                        
                         break;
                 }
                 const loadEvent = new LoadEvent(data);
@@ -97,10 +111,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
 
                     break;
             }
-        }catch(e){
-            const err = e as Error
-            this.dispatchEvent(new ErrorEvent('error', err));
-        }
+        
     }
 
     request$(self: this){
