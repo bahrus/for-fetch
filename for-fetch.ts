@@ -43,7 +43,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
     }
 
     async getData(self: this, href: string, resolvedTarget: Element){
-        const {noCache, stream, as} = self;
+        const {noCache, as} = self;
         let data: any;
         resolvedTarget.ariaBusy = 'true';
         if(this.#abortController !== undefined){

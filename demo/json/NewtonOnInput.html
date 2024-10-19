@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Example Formulating Url</title>
+    <script type=importmap>
+        {
+            "imports": {
+                "@power-elements/": "/node_modules/@power-elements/",
+                "trans-render/": "/node_modules/trans-render/"
+            }
+        }
+    </script>
+    <script type=module>
+        import '/index.js';
+        import '@power-elements/json-viewer/json-viewer.js';
+    </script>
+</head>
+<body>
+    <input name=op value=integrate>
+    <input name=expr value=x^2>
+    <fetch-for
+        for="@op @expr"
+        oninput="event.href=`https://newton.now.sh/api/v2/${event.forData.op.value}/${event.forData.expr.value}`"
+        target=-object
+        onerror=console.error(href)
+    >
+    </fetch-for>
+    ...
+    <json-viewer -object></json-viewer>
+    
+</body>
+</html>
