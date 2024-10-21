@@ -17,7 +17,7 @@
   "devDependencies": {
     "ssi-server": "0.0.1",
     "@playwright/test": "1.48.1",
-    "json-viewer": "2.2.0"
+    "@power-elements/json-viewer": "2.1.1"
   },
   "exports": {
     "./for-fetch.js": "./for-fetch.js",

@@ -1,6 +1,18 @@
 import { O } from 'trans-render/froop/O.js';
 import { config } from './config.js';
-export class ForFetch extends O /* implements Actions, AllProps*/ {
+export class ForFetch extends O {
+    async bindSrc(self) {
+        const { ':src': s } = self;
+        const { URLBuilder } = await import('./URLBuilder.js');
+        const urlBuilder = new URLBuilder(s);
+        return {
+            urlBuilder
+        };
+    }
+    async parseFor(self) {
+        //throw new Error('Method not implemented.');
+        return {};
+    }
     static config = config;
     #abortController;
     accept$(self) {
@@ -90,7 +102,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
         super.covertAssignment({
             nextWhenCount: whenCount + 1
         });
-        const { noCache, as, stream, href } = self;
+        const { noCache, as, stream, src } = self;
         const resolvedTarget = await self.resolveTarget(self);
         if (resolvedTarget === null) {
             throw 404;
@@ -99,14 +111,14 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
             resolvedTarget.ariaLive = 'polite';
         let data;
         if (!noCache) {
-            data = cache.get(this.localName)?.get(href);
+            data = cache.get(this.localName)?.get(src);
         }
         if (data === undefined) {
             if (as === 'html' && stream && resolvedTarget instanceof HTMLElement) {
-                this.doStream(self, href, resolvedTarget);
+                this.doStream(self, src, resolvedTarget);
                 return;
             }
-            data = await this.getData(self, href, resolvedTarget);
+            data = await this.getData(self, src, resolvedTarget);
         }
         switch (as) {
             case 'text':

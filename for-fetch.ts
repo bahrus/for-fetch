@@ -1,11 +1,25 @@
 import {O} from 'trans-render/froop/O.js';
 import {
-    Actions, AllProps, loadEventName, ProPP, PP,
+    Actions, AllProps, loadEventName, ProPP, PAP,
     ForData, EventForFetch, inputEventName, EventName, EndUserProps
 } from './ts-refs/for-fetch/types';
 import {config} from './config.js';
 
-export class ForFetch extends O /* implements Actions, AllProps*/ {
+export class ForFetch extends O implements Actions, AllProps {
+    async bindSrc(self: any) {
+        const {':src': s} = self;
+        const {URLBuilder} = await import('./URLBuilder.js');
+        const urlBuilder = new URLBuilder(s);
+        return {
+            urlBuilder
+        } as PAP; 
+    }
+    async parseFor(self: this): ProPP {
+        //throw new Error('Method not implemented.');
+        return {
+
+        }
+    }
     static override config = config;
 
     #abortController: AbortController | undefined;
@@ -22,7 +36,7 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
         if(!when){
             return {
                 whenCount: nextWhenCount
-            } as PP
+            } as PAP
         }
         if(this.#whenController !== undefined) this.#whenController.abort();
         this.#whenController = new AbortController();
@@ -95,9 +109,9 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
             const {whenCount} = self;
             super.covertAssignment({
                 nextWhenCount: whenCount! + 1
-            } as PP);
+            } as PAP);
 
-            const {noCache, as, stream, href} = self;
+            const {noCache, as, stream, src} = self;
             const resolvedTarget = await self.resolveTarget(self);
             if(resolvedTarget === null){
                 throw 404;
@@ -105,14 +119,14 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
             if(resolvedTarget.ariaLive === null) resolvedTarget.ariaLive = 'polite';
             let data: any;
             if(!noCache) {
-                data = cache.get(this.localName)?.get(href!);
+                data = cache.get(this.localName)?.get(src!);
             } 
             if(data === undefined){
                 if(as === 'html' && stream && resolvedTarget instanceof HTMLElement){
-                    this.doStream(self, href!, resolvedTarget);
+                    this.doStream(self, src!, resolvedTarget);
                     return;
                 }
-                data = await this.getData(self, href!, resolvedTarget);
+                data = await this.getData(self, src!, resolvedTarget);
             }
             
             switch(as){
@@ -148,14 +162,14 @@ export class ForFetch extends O /* implements Actions, AllProps*/ {
         if(!target){
             return {
                 targetSelf: true,
-            } as PP
+            } as PAP
         }
         const {parse} = await import('trans-render/dss/parse.js');
         const targetSpecifier = await parse(target);
         return {
             targetSelf: false,
             targetSpecifier    
-        } as PP;
+        } as PAP;
     }
 
     request$(self: this){

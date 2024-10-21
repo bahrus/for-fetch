@@ -49,10 +49,15 @@ export const config: OConfig<AllProps, Actions> = {
           type: 'String',
           ro: true,  
         },
-        href:{
+        src:{
             type: 'String',
             parse: true,
-            attrName: 'href'
+            attrName: 'src'
+        },
+        ':src':{
+            type: 'String',
+            parse: true,
+            attrName: ':src',
         },
         shadow:{
             type: 'String',
@@ -78,32 +83,38 @@ export const config: OConfig<AllProps, Actions> = {
             ifKeyIn: ['when']
         },
         do: {
-            ifAllOf: ['href'],
+            ifAllOf: ['src'],
             ifAtLeastOneOf: ['targetSpecifier', 'targetSelf'],
             ifEquals: ['whenCount', 'nextWhenCount']
         },
         parseTarget: {
             ifKeyIn: ['target']
         },
-        parseFor: {
-            ifAllOf: ['for'],
-            ifAtLeastOneOf: ['oninput', 'onselect'],
+        bindSrc: {
+            ifAllOf: [':src'],
         },
-        listenForInput:{
-            ifAllOf: ['forRefs', 'oninput']
-        },
-        doInitialLoad:{
-            ifAllOf: ['forRefs'],
-            ifAtLeastOneOf: ['oninput', 'onselect'],
-        },
-        onForm: {
-            ifAllOf: ['form'],
-        },
-        onFormSpecifier: {
-            ifAllOf: ['formSpecifier']
-        },
-        onFormRef: {
-            ifAllOf: ['formRef']
+        calcSrc: {
+            ifAllOf: ['be']
         }
+        // parseFor: {
+        //     ifAllOf: ['for'],
+        //     ifAtLeastOneOf: ['oninput', 'onselect'],
+        // },
+        // listenForInput:{
+        //     ifAllOf: ['forRefs', 'oninput']
+        // },
+        // doInitialLoad:{
+        //     ifAllOf: ['forRefs'],
+        //     ifAtLeastOneOf: ['oninput', 'onselect'],
+        // },
+        // onForm: {
+        //     ifAllOf: ['form'],
+        // },
+        // onFormSpecifier: {
+        //     ifAllOf: ['formSpecifier']
+        // },
+        // onFormRef: {
+        //     ifAllOf: ['formRef']
+        // }
     }
 };

@@ -1,11 +1,11 @@
-# for-fetch [TODO]
+# for-fetch [WIP]
 
 [![NPM version](https://badge.fury.io/js/for-fetch.png)](http://badge.fury.io/js/for-fetch)
 [![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/for-fetch?style=for-the-badge)](https://bundlephobia.com/result?p=for-fetch)
 <img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/for-fetch?compression=gzip">
 <!--[![Playwright Tests](https://github.com/bahrus/for-fetch/actions/workflows/CI.yml/badge.svg?branch=baseline)](https://github.com/bahrus/for-fetch/actions/workflows/CI.yml)-->
 
-## [API Documentation](https://cf-sw.bahrus.workers.dev/?href=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Ffor-fetch%400.0.9%2Fcustom-elements.json&stylesheet=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fwc-info%2Fsimple-ce-style.css&embedded=false&tags=&ts=2024-04-14T13%3A35%3A04.990Z&tocXSLT=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fwc-info%2Ftoc.xsl)
+## [API Documentation](https://cf-sw.bahrus.workers.dev/?src=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Ffor-fetch%400.0.9%2Fcustom-elements.json&stylesheet=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fwc-info%2Fsimple-ce-style.css&embedded=false&tags=&ts=2024-04-14T13%3A35%3A04.990Z&tocXSLT=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fwc-info%2Ftoc.xsl)
 
 ## [Demo](https://jsfiddle.net/bahrus/ma0vtbnx/1/)
 
@@ -15,20 +15,20 @@ for-fetch is a small-ish, bare-bones simple fetch web component.
 
 # Part 1 -- HTML inclusion
 
-## Example 1 -- Simple html include [TODO]
+## Example 1 -- Simple html include
 
 The following allows us to see future headlines in the mainstream media, today:
 
 ```html
 <for-fetch 
-stream href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
+stream src=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
 as=html shadow=open></for-fetch>
     
 ```
 
 For this very specific example shown above, due to restrictions of the cors-anywhere utility the link above uses, you will first need to go to https://cors-anywhere.herokuapp.com/corsdemo to unlock the service for a limited amount of time.
 
-for-fetch automatically caches, in memory, "get's", not POSTS or other HTTP methods, based on the localName of the custom element as the base key of the cache, and of course on the exact string of the href property. To disable this feature, specify attribute/property: no-cache/noCache.
+for-fetch automatically caches, in memory, "get's", not POSTS or other HTTP methods, based on the localName of the custom element as the base key of the cache, and of course on the exact string of the src property. To disable this feature, specify attribute/property: no-cache/noCache.
 
 ## Alternatives
 
@@ -71,7 +71,7 @@ So for that reason, *for-fetch* provides more support for clamping down on the a
 </script>
 
 <for-fetch be-hashing-out=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
-href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
+src=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
 as=html shadow=open ></for-fetch>
 ```
 
@@ -82,7 +82,7 @@ This package contains two alternative classes -- one for which the be-hashing-ou
 
 ```html
 <for-fetch 
-    href=https://newton.now.sh/api/v2/integrate/x^2 
+    src=https://newton.now.sh/api/v2/integrate/x^2 
     target=-object
 >
 </for-fetch>
@@ -102,19 +102,26 @@ It uses a custom syntax for describing, as concisely as possible and optimized f
 
 ## Specifying dependencies
 
-Like the built-in Form and Output elements, for-fetch supports integrating input from peer elements (form elements, form associated elements, contenteditable elements) by [id](https://github.com/whatwg/html/issues/10143), name, itemprop, class and part.  This also uses ["directed scoped specifier" syntax (or DSS)](https://github.com/bahrus/trans-render/wiki/VIII.--Directed-Scoped-Specifiers-(DSS)). We can formulate the href to use for the fetch request:
+Like the built-in Form and Output elements, for-fetch supports integrating input from peer elements (form elements, form associated elements, contenteditable elements) by [id](https://github.com/whatwg/html/issues/10143), name, itemprop, class and part.  This also uses ["directed scoped specifier" syntax (or DSS)](https://github.com/bahrus/trans-render/wiki/VIII.--Directed-Scoped-Specifiers-(DSS)). We can formulate the src to use for the fetch request:
 
-## Specify dynamic href [TODO]
+## Link to a form [TODO]
+
+By default, links to a form that contains for-fetch:
 
 ```html
+<form name>
 <input name=op value=integrate>
 <input name=expr value=x^2>
 <for-fetch
     for="@op::change @expr"
-    :href=https://newton.now.sh/api/v2/:op/:expr
+    :src=https://newton.now.sh/api/v2/:op/:expr
     target=-object
 >
 </for-fetch>
+<noscript>
+    <button type=submit>
+</noscript>
+<form>
 ...
 <json-viewer -object></json-viewer>
 ```
@@ -130,7 +137,7 @@ Syntax adheres to the [URL Pattern API](https://developer.mozilla.org/en-US/docs
 
 The click event is assumed if not specified.
 
-## Progressively routing the form element
+## Link to peer form [TODO]
 
 ```html
 <form name=newtonService>
@@ -144,7 +151,7 @@ The click event is assumed if not specified.
 
 <for-fetch
     form="@newtonService"
-    :href=https://newton.now.sh/api/v2/:op/:expr
+    :src=https://newton.now.sh/api/v2/:op/:expr
     target=-object
 >
 </for-fetch>
@@ -173,7 +180,7 @@ Only submits when the form is valid
         <my-form-associated-custom-element></my-form-associated-custom-element>
         <div itemscope>
             <for-fetch 
-                href=https://newton.now.sh/api/v2/integrate/x^2 
+                src=https://newton.now.sh/api/v2/integrate/x^2 
                 target=json-viewer[-object]
                 for="#isVegetarian /myHostElementEventTargetSubObject @greeting! |surname %myPart ~myFormAssociatedCustomElement ~sl-input::sl-input"
             >
@@ -203,9 +210,9 @@ To specify the closest element to search within, use the ^ character:
         <my-form-associated-custom-element></my-form-associated-custom-element>
         <div itemscope>
             <for-fetch 
-                href=https://newton.now.sh/api/v2/integrate/x^2 
+                src=https://newton.now.sh/api/v2/integrate/x^2 
                 target=-object
-                onerror=console.error(href)
+                onerror=console.error(src)
                 for="#isVegetarian /myHostElementEventTargetSubObject @greeting! ^section|surname ^section%myPart ^section~myFormAssociatedCustomElement"
                 oninput=...
                 
@@ -221,14 +228,14 @@ To specify the closest element to search within, use the ^ character:
 This may be an invalid use case, better handled with the Navigation api, this might just get in the way of that.
 
 ```html
-<div>I don't care if <a itemprop=monday href="https://example.org/Monday">Monday</a>'s blue</div>
+<div>I don't care if <a itemprop=monday src="https://example.org/Monday">Monday</a>'s blue</div>
 <div>
-    <a itemprop=tuesday href=https://example.org/Tuesday>Tuesday</a>'s gray and 
-    <a itemprop=wednesday href=https://example.org/Wednsday>Wednesday</a> too.
+    <a itemprop=tuesday src=https://example.org/Tuesday>Tuesday</a>'s gray and 
+    <a itemprop=wednesday src=https://example.org/Wednsday>Wednesday</a> too.
     
 </div>
-<div><a itemprop=thursday href=https://example.org/Thursday>Thursday</a> I don't care about you</div>
-<div>It's <a itemprop=friday href=https://example.org/Friday>Friday</a> I'm in love</div>
+<div><a itemprop=thursday src=https://example.org/Thursday>Thursday</a> I don't care about you</div>
+<div>It's <a itemprop=friday src=https://example.org/Friday>Friday</a> I'm in love</div>
 
 ...
 
@@ -241,7 +248,7 @@ This may be an invalid use case, better handled with the Navigation api, this mi
     oninput="
         const dayOfWeek = event.trigger.getAttribute('itemprop');
         event.target = `${dayOfWeek}-tab`;
-        event.href = event.trigger.href;
+        event.src = event.trigger.src;
         querySelector('my-tabs').selectedTab = event.target;
     "
 ></for-fetch>
@@ -255,7 +262,7 @@ This may be an invalid use case, better handled with the Navigation api, this mi
 </my-tabs>
 ```
 
-This will create a separate for-fetch tag (or whatever the superclass localName is) with the actual href.  This instance won't actually do the fetching.
+This will create a separate for-fetch tag (or whatever the superclass localName is) with the actual src.  This instance won't actually do the fetching.
 
 
 
@@ -316,7 +323,7 @@ However, for the less ambitious, the way we can do filtering or other manipulati
         <for-fetch
             for="@op @expr"
             base=newton-svc
-            :href=:op/:expr
+            :src=:op/:expr
             target=-object
         >
         </for-fetch>
@@ -326,7 +333,7 @@ However, for the less ambitious, the way we can do filtering or other manipulati
     </body>
 ```
 
-Alternatively, can work with link href rel=preconnect tags to resolve the base. [TODO]
+Alternatively, can work with link src rel=preconnect tags to resolve the base. [TODO]
 
 ## Connecting to indexed db in the filter code [TODO]
 
@@ -378,7 +385,7 @@ So you can list the specif ones you would like to see reflected for your specifi
         ...
         <style>
             for-fetch {
-                --attrs-to-reflect: href method for form target when credentials as no-cache stream target-self when-count next-when-count;
+                --attrs-to-reflect: src method for form target when credentials as no-cache stream target-self when-count next-when-count;
             }
             for-fetch * {
                 --attrs-to-reflect: initial;
