@@ -75,6 +75,9 @@ export const config: OConfig<AllProps, Actions> = {
             type: 'String',
             parse: true,
             attrName: 'when'
+        },
+        urlBuilder: {
+            type: 'Object'
         }
 
     },
