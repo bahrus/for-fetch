@@ -96,9 +96,9 @@ export const config: OConfig<AllProps, Actions> = {
         bindSrc: {
             ifAllOf: [':src'],
         },
-        calcSrc: {
-            ifAllOf: ['be']
-        }
+        // calcSrc: {
+        //     ifAllOf: ['be']
+        // }
         // parseFor: {
         //     ifAllOf: ['for'],
         //     ifAtLeastOneOf: ['oninput', 'onselect'],
