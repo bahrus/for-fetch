@@ -78,7 +78,7 @@ as=html shadow=open ></for-fetch>
 This package contains two alternative classes -- one for which the be-hashing-out check is opt-in, the other which requires it.
 
 
-## Example 3 - Sending data to a target: [TODO]
+## Example 3 - Sending data to a target:
 
 ```html
 <for-fetch 
