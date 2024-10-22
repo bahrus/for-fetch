@@ -109,11 +109,34 @@ Like the built-in Form and Output elements, for-fetch supports integrating input
 By default, links to a form that contains for-fetch:
 
 ```html
-<form name>
+<form>
 <input name=op value=integrate>
 <input name=expr value=x^2>
 <for-fetch
     :src=https://newton.now.sh/api/v2/:@op/:@expr
+    target=-object
+>
+</for-fetch>
+<noscript>
+    <button type=submit>
+</noscript>
+</form>
+...
+<json-viewer -object></json-viewer>
+```
+
+Syntax adheres to the [URL Pattern API](https://developer.mozilla.org/en-US/docs/Web/API/URL_Pattern_API) which unfortunately doesn't support [going in the opposite direction](https://github.com/whatwg/urlpattern/issues/73).
+
+This listens for the input event by default.
+
+## Specify event names to listen for
+
+```html
+<form>
+<input name=op value=integrate>
+<input name=expr value=x^2>
+<for-fetch
+    :src=https://newton.now.sh/api/v2/:@op::change/:@expr
     target=-object
 >
 </for-fetch>
@@ -125,9 +148,6 @@ By default, links to a form that contains for-fetch:
 <json-viewer -object></json-viewer>
 ```
 
-Syntax adheres to the [URL Pattern API](https://developer.mozilla.org/en-US/docs/Web/API/URL_Pattern_API) which unfortunately doesn't support [going in the opposite direction](https://github.com/whatwg/urlpattern/issues/73).
-
-This listens for the input event by default.
 
 ## Block fetch without user interaction [TODO]
 
@@ -152,7 +172,7 @@ The click event is assumed if not specified.
 
 <for-fetch
     form="@newtonService"
-    :src=https://newton.now.sh/api/v2/:op/:expr
+    :src=https://newton.now.sh/api/v2/:@op/:@expr
     target=-object
 >
 </for-fetch>
