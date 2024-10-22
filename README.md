@@ -113,8 +113,7 @@ By default, links to a form that contains for-fetch:
 <input name=op value=integrate>
 <input name=expr value=x^2>
 <for-fetch
-    for="@op::change @expr"
-    :src=https://newton.now.sh/api/v2/:op/:expr
+    :src=https://newton.now.sh/api/v2/:@op/:@expr
     target=-object
 >
 </for-fetch>
@@ -127,6 +126,8 @@ By default, links to a form that contains for-fetch:
 ```
 
 Syntax adheres to the [URL Pattern API](https://developer.mozilla.org/en-US/docs/Web/API/URL_Pattern_API) which unfortunately doesn't support [going in the opposite direction](https://github.com/whatwg/urlpattern/issues/73).
+
+This listens for the input event by default.
 
 ## Block fetch without user interaction [TODO]
 
