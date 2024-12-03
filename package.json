@@ -12,11 +12,11 @@
   "dependencies": {
     "idb-keyval": "6.2.1",
     "stream-orator": "0.0.24",
-    "trans-render": "0.0.848"
+    "trans-render": "0.0.863"
   },
   "devDependencies": {
     "ssi-server": "0.0.1",
-    "@playwright/test": "1.48.1",
+    "@playwright/test": "1.49.0",
     "@power-elements/json-viewer": "2.1.1"
   },
   "exports": {
