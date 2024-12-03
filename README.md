@@ -109,14 +109,12 @@ Like the built-in Form and Output elements, for-fetch supports integrating input
 By default, links to a form that contains for-fetch:
 
 ```html
-<form>
-<input name=op value=integrate>
-<input name=expr value=x^2>
-<for-fetch
-    :src=https://newton.now.sh/api/v2/:@op/:@expr
-    target=-object
+<form
+    🍺-path=https://newton.now.sh/api/v2/:@op/:@expr
 >
-</for-fetch>
+<input :op value=integrate>
+<input :expr value=x^2>
+<for-fetch></for-fetch>
 <noscript>
     <button type=submit>
 </noscript>
