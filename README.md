@@ -106,7 +106,7 @@ Like the built-in Form and Output elements, for-fetch supports integrating input
 
 ## Link to a form [TODO]
 
-By default, links to a form that contains for-fetch:
+*for-fetch* and *for-fetch-derived* custom elements can link up with a form.  If no src value is specified, it does an "upsearch" for the  closest form that contains the *for-fetch(-derived)* element:
 
 ```html
 <form
@@ -123,9 +123,31 @@ By default, links to a form that contains for-fetch:
 <json-viewer -object></json-viewer>
 ```
 
-Syntax adheres to the [URL Pattern API](https://developer.mozilla.org/en-US/docs/Web/API/URL_Pattern_API) which unfortunately doesn't support [going in the opposite direction](https://github.com/whatwg/urlpattern/issues/73).
+or
 
-This listens for the input event by default.
+```html
+<form
+    🍺-path=https://newton.now.sh/api/v2/:@op/:@expr
+>
+<input :op value=integrate>
+<input :expr value=x^2>
+
+<noscript>
+    <button type=submit>
+</noscript>
+</form>
+
+<for-fetch></for-fetch>
+...
+<json-viewer -object></json-viewer>
+```
+
+As we can see in the example above, *for-fetch* tightly integrates with custom element enhancements such as [be-reformable](https://github.com/bahrus/be-reformable).  That integration is somewhat flexible.  It requires that the form enhancement:
+
+1.  Emits event "fetch-ready" when the form is in a state where the fetch should happen
+2.  
+
+
 
 ## Specify event names to listen for
 
