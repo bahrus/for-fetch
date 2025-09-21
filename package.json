@@ -10,13 +10,13 @@
     "custom-elements"
   ],
   "dependencies": {
-    "idb-keyval": "6.2.1",
-    "stream-orator": "0.0.24",
-    "trans-render": "0.0.863"
+    "idb-keyval": "6.2.2",
+    "stream-orator": "0.0.25",
+    "trans-render": "0.0.958"
   },
   "devDependencies": {
-    "spa-ssi": "0.0.8",
-    "@playwright/test": "1.49.0",
+    "spa-ssi": "0.0.12",
+    "@playwright/test": "1.55.0",
     "@power-elements/json-viewer": "2.1.1"
   },
   "exports": {
