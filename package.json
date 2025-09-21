@@ -15,7 +15,7 @@
     "trans-render": "0.0.863"
   },
   "devDependencies": {
-    "ssi-server": "0.0.1",
+    "spa-ssi": "0.0.8",
     "@playwright/test": "1.49.0",
     "@power-elements/json-viewer": "2.1.1"
   },
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "test": "playwright test",
-    "serve": "python3 ./node_modules/ssi-server/ssi_server.py",
+    "serve": "node ./node_modules/spa-ssi/serve.js",
     "safari": "npx playwright wk http://localhost:8000",
     "update": "ncu -u && npm install",
     "doc": "node doc.js"
