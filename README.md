@@ -83,22 +83,22 @@ This package contains two alternative classes -- one for which the be-hashing-ou
 ```html
 <for-fetch 
     src=https://newton.now.sh/api/v2/integrate/x^2 
-    target=-object
+    target=#json-viewer?.object
 >
 </for-fetch>
 ...
-<json-viewer -object></json-viewer>
+<json-viewer id=json-viewer></json-viewer>
 ```
 
-for-fetch passes the results of the fetch to camel cased property obtained from the attribute marker, i.e. it will set:
+In this example, *for-fetch* passes the results of the fetch to the property path specified after the id, i.e. it will set:
 
 ```JavaScript
 oJsonViewer.object = ...
 ```
 
-What this example illustrates is that the target attribute is *not* using simple css selectors to find the target.  Rather it is using a custom syntax that is optimized for creating linkages between elements of peer elements, and/or between elements and its custom element host container.
+If working in a large DOM tree, where maintaining unique id's becomes challenging, consider taking advantage of mount-observer's auto id generation (TODO: document)
 
-It uses a custom syntax for describing, as concisely as possible and optimized for common scenarios, how to search for a nearby element, and also what event to respond to if applicable.  This syntax is referred to as ["directed scoping specifiers" (DSS)](https://github.com/bahrus/trans-render/wiki/VIII.--Directed-Scoped-Specifiers-(DSS)).
+The *target* attribute is using a custom syntax for describing, as concisely as possible how to search for a nearby element, and also what property (path) to set.  This syntax is referred to as ["directed scoping specifiers" (DSS)](https://github.com/bahrus/trans-render/wiki/VIII.--Directed-Scoped-Specifiers-(DSS)).
 
 ## Specifying dependencies
 
