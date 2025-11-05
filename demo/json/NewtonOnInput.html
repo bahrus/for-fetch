@@ -11,17 +11,17 @@
     </script>
 </head>
 <body>
-    <input name=op value=integrate>
-    <input name=expr value=x^2>
+    <input name=op id=op value=integrate>
+    <input name=expr id=expr value=x^2>
     <for-fetch
-        for="@op @expr"
+        for="#op #expr"
         :src=https://newton.now.sh/api/v2/:op/:expr
-        target=-object
+        target=#json-viewer?.object
         onerror=console.error(src)
     >
     </for-fetch>
     ...
-    <json-viewer -object></json-viewer>
+    <json-viewer id=json-viewer></json-viewer>
     
 </body>
 </html>
