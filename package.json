@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Base class for web components as a service",
   "main": "for-fetch.js",
+  "type": "module",
   "keywords": [
     "web-components",
     "web-component",
@@ -17,7 +18,8 @@
   "devDependencies": {
     "spa-ssi": "0.0.23",
     "@playwright/test": "1.56.1",
-    "@power-elements/json-viewer": "2.1.1"
+    "@power-elements/json-viewer": "2.1.1",
+    "wc-info": "0.0.185"
   },
   "exports": {
     "./for-fetch.js": "./for-fetch.js",
@@ -28,7 +30,7 @@
     "serve": "node ./node_modules/spa-ssi/serve.js",
     "safari": "npx playwright wk http://localhost:8000",
     "update": "ncu -u && npm install",
-    "doc": "node doc.js"
+    "build-manifest": "node doc.mjs > custom-elements.json"
   },
  "author": "Bruce B. Anderson <anderson.bruce.b@gmail.com>",
   "license": "MIT",

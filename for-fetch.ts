@@ -5,7 +5,7 @@ import {
 } from './ts-refs/for-fetch/types';
 import {config} from './config.js';
 
-export class ForFetch extends O implements Actions, AllProps {
+export class ForFetch extends O implements Actions {
     async bindSrc(self: any) {
         const {':src': s} = self;
         const {URLBuilder} = await import('./URLBuilder.js');
@@ -221,6 +221,8 @@ export class ForFetch extends O implements Actions, AllProps {
         }
     }
 }
+
+
 
 const cache: Map<string, Map<string, any>> = new Map();
 
