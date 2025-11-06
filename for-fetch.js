@@ -24,7 +24,7 @@ export class ForFetch extends O {
     #whenController;
     async initializeWhen(self) {
         const { when, nextWhenCount } = self;
-        if (!when) {
+        if (!(typeof when === 'string')) {
             return {
                 whenCount: nextWhenCount
             };

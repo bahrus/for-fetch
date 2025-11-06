@@ -72,6 +72,9 @@ export const config = {
             type: 'String',
             parse: true,
             attrName: 'when'
+        },
+        urlBuilder: {
+            type: 'Object'
         }
     },
     actions: {
@@ -89,9 +92,9 @@ export const config = {
         bindSrc: {
             ifAllOf: [':src'],
         },
-        calcSrc: {
-            ifAllOf: ['be']
-        }
+        // calcSrc: {
+        //     ifAllOf: ['be']
+        // }
         // parseFor: {
         //     ifAllOf: ['for'],
         //     ifAtLeastOneOf: ['oninput', 'onselect'],

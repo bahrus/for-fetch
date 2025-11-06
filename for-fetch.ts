@@ -33,7 +33,7 @@ export class ForFetch extends O implements Actions, AllProps {
     #whenController: AbortController | undefined;
     async initializeWhen(self: this){
         const {when, nextWhenCount} = self;
-        if(!when){
+        if(!(typeof when === 'string')){
             return {
                 whenCount: nextWhenCount
             } as PAP
