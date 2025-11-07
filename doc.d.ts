@@ -51,7 +51,32 @@ export interface EndUserProps {
      * DOM element where the retrieved content should be applied.
      */
     target?: string,
+    /**
+     * If as=html, specify whether to (stream) the contents into an attached shadow DOM or not.
+     */
+    shadow?: ShadowRootMode,
 
+    /**
+     * Do not cache results even if the url has been invoked before.
+     */
+    noCache?: boolean,
+
+    /**
+     * Stream the contents into the target element
+     */
+    stream?: boolean,
+
+    /**
+     * Directed Scoped Specifier to a 
+     * (button) element, to delay submitting the fetch request until that button is clicked.
+     */
+    when?: string,
+
+    /**
+     * Directed Scoped Specifier to a form element
+     * that we should use to form the url and body from.
+     */
+    form?: string,
 }
 
 /**

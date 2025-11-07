@@ -77,6 +77,46 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "shadow",
+              "description": "If as=html, specify whether to (stream) the contents into an attached shadow DOM or not.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noCache",
+              "description": "Do not cache results even if the url has been invoked before.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "stream",
+              "description": "Stream the contents into the target element",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "when",
+              "description": "Directed Scoped Specifier to a \n(button) element, to delay submitting the fetch request until that button is clicked.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "description": "Directed Scoped Specifier to a form element\nthat we should use to form the url and body from.",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
@@ -113,6 +153,26 @@
             {
               "name": "target",
               "description": "Directed Scoped Specifier to the \nDOM element where the retrieved content should be applied."
+            },
+            {
+              "name": "shadow",
+              "description": "If as=html, specify whether to (stream) the contents into an attached shadow DOM or not."
+            },
+            {
+              "name": "no-cache",
+              "description": "Do not cache results even if the url has been invoked before."
+            },
+            {
+              "name": "stream",
+              "description": "Stream the contents into the target element"
+            },
+            {
+              "name": "when",
+              "description": "Directed Scoped Specifier to a \n(button) element, to delay submitting the fetch request until that button is clicked."
+            },
+            {
+              "name": "form",
+              "description": "Directed Scoped Specifier to a form element\nthat we should use to form the url and body from."
             }
           ],
           "cssParts": [],
