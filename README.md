@@ -9,7 +9,7 @@
 
 ## [Demo](https://jsfiddle.net/bahrus/ma0vtbnx/1/)
 
-## [Reference API](https://wc-info.bahrus.workers.dev/?href=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Ffor-fetch%400.0.1%2Fcustom-elements.json&stylesheet=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fwc-info%400.0.185%2Fsimple-ce-style.css&embedded=false&tags=&ts=2025-11-07T19%3A39%3A16.154Z&intro=Shoelace+Web+Components)
+## [Reference API](https://wc-info.bahrus.workers.dev/?href=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Ffor-fetch%400.0.1%2Fcustom-elements.json&stylesheet=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fwc-info%400.0.185%2Fsimple-ce-style.css&embedded=false&tags=&ts=2025-11-07T19%3A39%3A16.154Z&intro=for-fetch+web+component)
 
 for-fetch is a small-ish, bare-bones simple fetch web component.  
 
