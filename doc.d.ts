@@ -10,6 +10,19 @@ export interface EndUserProps {
      */
     src?: string,
 
+    ':src': string,
+
+    /**
+     * Specifier for list of form associated or contentEditable peer elements that 
+     * should partake in forming the URL.
+     */
+    for?: string,
+
+    /**
+     * Indicates whether to treat the response as HTML or JSON or Text
+     */
+    as?: 'html' | 'json' | 'text',
+
 }
 
 /**

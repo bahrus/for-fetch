@@ -25,6 +25,29 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": ":src",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "for",
+              "description": "Specifier for list of form associated or contentEditable peer elements that \nshould partake in forming the URL.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "as",
+              "description": "Indicates whether to treat the response as HTML or JSON or Text",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
@@ -34,6 +57,17 @@
             {
               "name": "src",
               "description": "Url to invoke"
+            },
+            {
+              "name": ":src"
+            },
+            {
+              "name": "for",
+              "description": "Specifier for list of form associated or contentEditable peer elements that \nshould partake in forming the URL."
+            },
+            {
+              "name": "as",
+              "description": "Indicates whether to treat the response as HTML or JSON or Text"
             }
           ],
           "cssParts": [],
