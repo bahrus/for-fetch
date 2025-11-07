@@ -23,6 +23,24 @@ export interface EndUserProps {
      */
     as?: 'html' | 'json' | 'text',
 
+        /**
+     * The http verb to be used for the request
+     */
+    method?: 
+        | 'GET' 
+        | 'HEAD' 
+        | 'POST' 
+        | 'PUT' 
+        | 'DELETE' 
+        | 'OPTIONS' 
+        | 'TRACE'
+        | 'PATCH',
+    /**
+     * Either the JSON stringified or the parsed JSON object 
+     * If parsed, the web component will stringify it.
+     */
+    body?: any,
+
 }
 
 /**

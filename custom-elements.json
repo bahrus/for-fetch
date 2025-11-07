@@ -48,6 +48,19 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "method",
+              "description": "The http verb to be used for the request",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "body",
+              "description": "Either the JSON stringified or the parsed JSON object \nIf parsed, the web component will stringify it."
             }
           ],
           "attributes": [
@@ -68,6 +81,14 @@
             {
               "name": "as",
               "description": "Indicates whether to treat the response as HTML or JSON or Text"
+            },
+            {
+              "name": "method",
+              "description": "The http verb to be used for the request"
+            },
+            {
+              "name": "body",
+              "description": "Either the JSON stringified or the parsed JSON object \nIf parsed, the web component will stringify it."
             }
           ],
           "cssParts": [],
