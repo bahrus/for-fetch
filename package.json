@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "Base class for web components as a service",
   "main": "for-fetch.js",
-  "type": "module",
   "keywords": [
     "web-components",
     "web-component",
