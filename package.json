@@ -1,6 +1,6 @@
 {
   "name": "for-fetch",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Base class for web components as a service",
   "main": "for-fetch.js",
   "keywords": [
@@ -31,7 +31,7 @@
     "update": "ncu -u && npm install",
     "build-manifest": "node doc.mjs > custom-elements.json"
   },
- "author": "Bruce B. Anderson <anderson.bruce.b@gmail.com>",
+  "author": "Bruce B. Anderson <anderson.bruce.b@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/for-fetch/issues"
