@@ -61,6 +61,22 @@
               "kind": "field",
               "name": "body",
               "description": "Either the JSON stringified or the parsed JSON object \nIf parsed, the web component will stringify it."
+            },
+            {
+              "kind": "field",
+              "name": "credentials",
+              "description": "Request credentials",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "description": "Directed Scoped Specifier to the \nDOM element where the retrieved content should be applied.",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
@@ -89,6 +105,14 @@
             {
               "name": "body",
               "description": "Either the JSON stringified or the parsed JSON object \nIf parsed, the web component will stringify it."
+            },
+            {
+              "name": "credentials",
+              "description": "Request credentials"
+            },
+            {
+              "name": "target",
+              "description": "Directed Scoped Specifier to the \nDOM element where the retrieved content should be applied."
             }
           ],
           "cssParts": [],

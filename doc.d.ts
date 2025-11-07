@@ -41,6 +41,17 @@ export interface EndUserProps {
      */
     body?: any,
 
+    /**
+     * Request credentials
+     */
+    credentials?: RequestCredentials,
+
+    /**
+     * Directed Scoped Specifier to the 
+     * DOM element where the retrieved content should be applied.
+     */
+    target?: string,
+
 }
 
 /**
