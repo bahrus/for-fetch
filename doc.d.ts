@@ -2,7 +2,14 @@
 import {SimpleWCInfo} from './ts-refs/wc-info/SimpleWCInfo';
 
 export interface EndUserProps {
-    
+
+    accept?: string,
+    /**
+     * Url to invoke
+     * @readonly true
+     */
+    src?: string,
+
 }
 
 /**

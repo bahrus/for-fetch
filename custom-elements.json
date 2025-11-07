@@ -10,8 +10,32 @@
           "tagName": "for-fetch",
           "name": "ForFetchInfo",
           "customElement": true,
-          "members": [],
-          "attributes": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "accept",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "src",
+              "description": "Url to invoke",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "accept"
+            },
+            {
+              "name": "src",
+              "description": "Url to invoke"
+            }
+          ],
           "cssParts": [],
           "slots": [],
           "events": []
