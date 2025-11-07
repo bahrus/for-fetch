@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2.1.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "",
+      "declarations": [
+        {
+          "tagName": "for-fetch",
+          "name": "ForFetchInfo",
+          "customElement": true,
+          "members": [],
+          "attributes": [],
+          "cssParts": [],
+          "slots": [],
+          "events": []
+        }
+      ]
+    }
+  ]
+}
