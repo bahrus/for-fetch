@@ -64,20 +64,7 @@ To support this kind of selective inclusion, consider using *i-html* or the othe
 
 So for that reason, *for-fetch* provides more support for clamping down on the allowed attributes, by allowing the developer to integrate the [*be-hashing-out*](https://github.com/bahrus/be-hashing-out) enhancement: 
 
-## Example 2 -- Optional security check [TODO]
 
-```html
-<script blocking=render>
-    (await import('be-hashing-out/register.js'))
-    .register('63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228');
-</script>
-
-<for-fetch be-hashing-out=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
-src=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
-as=html shadow=open ></for-fetch>
-```
-
-This package contains two alternative classes -- one for which the be-hashing-out check is opt-in, the other which requires it.
 
 
 ## Example 3 - Sending data to a target:
@@ -101,6 +88,21 @@ oJsonViewer.object = ...
 If working in a large DOM tree, where maintaining unique id's becomes challenging, consider taking advantage of mount-observer's auto id generation (TODO: document)
 
 The *target* attribute is using a custom syntax for describing, as concisely as possible how to search for a nearby element, and also what property (path) to set.  This syntax is referred to as ["directed scoping specifiers" (DSS)](https://github.com/bahrus/trans-render/wiki/VIII.--Directed-Scoped-Specifiers-(DSS)).
+
+## Example TBD -- Optional security check [TODO]
+
+```html
+<script blocking=render>
+    (await import('be-hashing-out/register.js'))
+    .register('63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228');
+</script>
+
+<for-fetch be-hashing-out=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
+src=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
+as=html shadow=open ></for-fetch>
+```
+
+This package contains two alternative classes -- one for which the be-hashing-out check is opt-in, the other which requires it.
 
 ## Specifying dependencies
 
